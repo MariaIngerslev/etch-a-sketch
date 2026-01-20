@@ -1,4 +1,3 @@
-const CONTAINER_SIZE = 960;
 const DEFAULT_GRID_SIZE = 16;
 const MAX_GRID_SIZE = 100;
 
@@ -23,11 +22,9 @@ function clearGrid() {
 function createGrid(gridSize) {
   clearGrid();
 
-  // Keep layout stable even if CSS changes later
-  container.style.width = `${CONTAINER_SIZE}px`;
-  container.style.height = `${CONTAINER_SIZE}px`;
-
-  const squareSize = CONTAINER_SIZE / gridSize;
+  // Compute square size from the actual rendered container (responsive)
+  const containerSize = container.clientWidth;
+  const squareSize = containerSize / gridSize;
   const totalSquares = gridSize * gridSize;
 
   for (let i = 0; i < totalSquares; i++) {

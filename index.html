@@ -9,11 +9,19 @@
 </head>
 <body>
 <h1>Etch-a-Sketch</h1>
+
 <div class="controls">
   <button id="resizeBtn" type="button">Reset / Resize</button>
   <button id="modeRainbow" type="button" aria-pressed="true">Rainbow</button>
   <button id="modeBlack" type="button" aria-pressed="false">Black</button>
 </div>
-<div class="container" id="container"></div>
+
+<div class="etch-frame">
+  <div class="screen-bezel">
+    <div class="container" id="container"></div>
+  </div>
+  <div class="knob knob-left"></div>
+  <div class="knob knob-right"></div>
+</div>
 </body>
 </html>
