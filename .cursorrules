@@ -32,6 +32,21 @@ The current project is "Etch-a-Sketch".
 - Logic to clear the board/reset the colors.
 
 # UI/UX & Styling Guidelines
-- **Visual Consistency:** Ensure all buttons (Rainbow, Black, Eraser, Eraser) share the same base styling (padding, font-family, border-radius, box-shadow) as the primary "Color" picker button to maintain the "Retro Toy" aesthetic.
+
+## Control Panel Layout (Header)
+- **Flexbox Alignment:** The control panel (containing buttons, sliders, color pickers) must be a Flexbox container (`display: flex`) with:
+  - `justify-content: center` (or `space-between` if grouping controls).
+  - `align-items: center` (Crucial: This ensures sliders and buttons center vertically).
+  - `gap` (e.g., `1rem` or `20px`) to provide breathing room between elements. `flex-wrap: wrap` should be used for responsiveness.
+
+## Button & Input Uniformity
+- **Consistent Height:** ALL interactive elements (`<button>`, `input[type="color"]`, `input[type="range"]` containers) must share a consistent visual height.
+  - *Recommendation:* Set a fixed `height` (e.g., `40px`) for buttons and the color input.
+- **Color Picker Styling:** The default `input[type="color"]` is notoriously hard to style. Remove its default border and padding so it matches the buttons. Alternatively, wrap it in a `<label>` that looks like a button.
+- **Typography:** Ensure `font-family`, `font-size`, and `font-weight` are identical across all buttons and labels.
+
+## Visual Feedback & States
+- **Hover Effects:** All interactive elements need a `:hover` state (e.g., slight `transform: scale(1.05)` or background brightness change).
+- **Cursor:** Always set `cursor: pointer` on buttons, sliders, and color pickers.
 - **Active States:** When a mode is active (e.g., "Rainbow Mode"), the corresponding button must visually indicate this (e.g., darker background, inset shadow, or distinct border color).
-- **CSS Architecture:** Reuse classes where possible. Use a common class like `.btn` for shared styles and modifier classes (e.g., `.btn-active`) for states. Avoid repeating CSS properties unnecessarily.
+- **CSS Architecture:** Reuse classes where possible. Use a common class like `.btn` for shared styles and modifier classes (e.g., `.btn-active`) for states.
