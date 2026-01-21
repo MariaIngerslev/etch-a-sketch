@@ -18,8 +18,14 @@
     <input id="colorPicker" type="color" value="#ff0000" aria-label="Pick drawing color">
   </div>
 
-  <button id="modeRainbow" type="button" aria-pressed="true">Rainbow</button>
-  <button id="modeBlack" type="button" aria-pressed="false">Black</button>
+  <button id="modeRainbow" type="button" aria-pressed="true">
+    <span class="mode-indicator mode-indicator--rainbow" aria-hidden="true"></span>
+    Rainbow
+  </button>
+  <button id="modeBlack" type="button" aria-pressed="false">
+    <span class="mode-indicator mode-indicator--black" aria-hidden="true"></span>
+    Black
+  </button>
   <button id="modeEraser" type="button" aria-pressed="false">Eraser</button>
 </div>
 
