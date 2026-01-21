@@ -40,13 +40,19 @@ The current project is "Etch-a-Sketch".
   - `gap` (e.g., `1rem` or `20px`) to provide breathing room between elements. `flex-wrap: wrap` should be used for responsiveness.
 
 ## Button & Input Uniformity
+- **Unified Color Palette:** All interactive controls—standard buttons, grid size inputs, and mode toggles (Light/Dark)—must share the exact same base **background color**.
 - **Consistent Height:** ALL interactive elements (`<button>`, `input[type="color"]`, `input[type="range"]` containers) must share a consistent visual height.
   - *Recommendation:* Set a fixed `height` (e.g., `40px`) for buttons and the color input.
 - **Color Picker Styling:** The default `input[type="color"]` is notoriously hard to style. Remove its default border and padding so it matches the buttons. Alternatively, wrap it in a `<label>` that looks like a button.
 - **Typography:** Ensure `font-family`, `font-size`, and `font-weight` are identical across all buttons and labels.
 
 ## Visual Feedback & States
-- **Hover Effects:** All interactive elements need a `:hover` state (e.g., slight `transform: scale(1.05)` or background brightness change).
+- **Hover Effects (The "Pop"):** When the user hovers over any button or control:
+  - The element must **become lighter** (e.g., `filter: brightness(1.1)` or a lighter background hex).
+  - The element must **visually "pop up"** (e.g., `transform: translateY(-2px)` or `transform: scale(1.05)`).
+  - Include a short `transition` (e.g., `0.1s ease-in-out`) to make this movement feel physical.
+- **Active/Selected States:** When a specific mode is active (e.g., "Rainbow Mode", "Eraser"):
+  - The button must **become darker** (e.g., `filter: brightness(0.9)` or a darker background hex) to mimic being pressed down.
+  - Ideally, remove the "pop up" transform or apply an inset shadow (`box-shadow: inset ...`) to convey depth.
 - **Cursor:** Always set `cursor: pointer` on buttons, sliders, and color pickers.
-- **Active States:** When a mode is active (e.g., "Rainbow Mode"), the corresponding button must visually indicate this (e.g., darker background, inset shadow, or distinct border color).
-- **CSS Architecture:** Reuse classes where possible. Use a common class like `.btn` for shared styles and modifier classes (e.g., `.btn-active`) for states.
+- **CSS Architecture:** Reuse classes where possible. Use a common class like `.btn` for shared styles and modifier classes (e.g., `.btn.active`) for states.
