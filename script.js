@@ -4,6 +4,8 @@ const ERASE_COLOR = '#ffffff';
 
 const container = document.querySelector('#container');
 const resizeBtn = document.querySelector('#resizeBtn');
+const gridSizeSlider = document.querySelector('#grid-size-slider');
+const gridSizeDisplay = document.querySelector('#grid-size-display');
 const colorPicker = document.querySelector('#colorPicker');
 const modeRainbowBtn = document.querySelector('#modeRainbow');
 const modeBlackBtn = document.querySelector('#modeBlack');
@@ -190,23 +192,19 @@ function createGrid(gridSize) {
   }
 }
 
-function promptForGridSize() {
-  while (true) {
-    const raw = prompt(`Enter grid size (1-${MAX_GRID_SIZE})`, `${DEFAULT_GRID_SIZE}`);
-    if (raw === null) return null; // user cancelled
-
-    const n = Number.parseInt(raw, 10);
-    const isValid = Number.isInteger(n) && n >= 1 && n <= MAX_GRID_SIZE;
-    if (isValid) return n;
-
-    alert(`Please enter a whole number between 1 and ${MAX_GRID_SIZE}.`);
-  }
+function updateGridSizeDisplay(size) {
+  gridSizeDisplay.textContent = `${size} x ${size}`;
 }
 
-resizeBtn.addEventListener('click', () => {
-  const newSize = promptForGridSize();
-  if (newSize === null) return;
+gridSizeSlider.addEventListener('input', (event) => {
+  const newSize = Number(event.target.value);
+  updateGridSizeDisplay(newSize);
   createGrid(newSize);
+});
+
+resizeBtn.addEventListener('click', () => {
+  const currentSize = Number(gridSizeSlider.value);
+  createGrid(currentSize);
 });
 
 modeRainbowBtn.addEventListener('click', () => setDrawMode('rainbow'));
@@ -218,4 +216,5 @@ brightnessSlider.addEventListener('input', (event) => {
 });
 
 setDrawMode('rainbow');
+updateGridSizeDisplay(DEFAULT_GRID_SIZE);
 createGrid(DEFAULT_GRID_SIZE);

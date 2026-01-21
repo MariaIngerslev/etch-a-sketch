@@ -11,7 +11,12 @@
 <h1>Etch-a-Sketch</h1>
 
 <div class="controls">
-  <button id="resizeBtn" type="button">Reset / Resize</button>
+  <div class="grid-size-control" aria-label="Grid size control">
+    <span class="grid-size-label">Grid Size:</span>
+    <input type="range" id="grid-size-slider" min="1" max="100" value="16">
+    <span class="grid-size-display" id="grid-size-display">16 x 16</span>
+  </div>
+  <button id="resizeBtn" type="button">Clear</button>
 
   <div class="tool">
     <span class="tool-label">Color</span>
