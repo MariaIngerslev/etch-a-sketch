@@ -8,48 +8,60 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-<h1>Etch-a-Sketch</h1>
+    <h1>Etch-a-Sketch</h1>
 
-<div class="controls">
-  <div class="control-chip grid-size-control" aria-label="Grid size control">
-    <span class="control-label">Grid Size</span>
-    <input type="range" id="grid-size-slider" min="1" max="100" value="16">
-    <span class="grid-size-display" id="grid-size-display">16 x 16</span>
-  </div>
+    <div class="controls">
+        
+        <div class="control-group setup">
+            <div class="range-wrapper">
+                <label for="grid-size-slider" class="control-label">Grid Size</label>
+                <input type="range" id="grid-size-slider" min="1" max="100" value="16">
+                <span id="grid-size-display" class="value-display">16 x 16</span>
+            </div>
+        </div>
 
-  <button id="resizeBtn" type="button" class="btn">Clear</button>
+        <div class="control-group tools">
+            
+            <div class="button-group">
+                <button id="modeBlack" class="btn" type="button" aria-pressed="false">
+                    Black
+                </button>
+                
+                <button id="modeRainbow" class="btn" type="button" aria-pressed="true">
+                    Rainbow
+                </button>
 
-  <div class="control-chip tool">
-    <span class="control-label">Color</span>
-    <label class="color-button" for="colorPicker" aria-label="Pick drawing color">
-      <input id="colorPicker" type="color" value="#ff0000">
-    </label>
-  </div>
+                <div class="color-picker-wrapper" title="Choose Color">
+                    <input id="colorPicker" type="color" value="#ff0000" aria-label="Pick drawing color">
+                </div>
 
-  <button id="modeRainbow" type="button" class="btn active" aria-pressed="true">
-    <span class="mode-indicator mode-indicator--rainbow" aria-hidden="true"></span>
-    Rainbow
-  </button>
-  <button id="modeBlack" type="button" class="btn" aria-pressed="false">
-    <span class="mode-indicator mode-indicator--black" aria-hidden="true"></span>
-    Black
-  </button>
+                <button id="modeEraser" class="btn" type="button" aria-pressed="false">
+                    Eraser
+                </button>
+            </div>
 
-  <div class="control-chip brightness-control" aria-label="Brightness control">
-    <span class="control-label">Dark</span>
-    <input type="range" id="brightness-slider" min="0" max="100" value="50">
-    <span class="control-label">Light</span>
-  </div>
+            <div class="separator"></div>
 
-  <button id="modeEraser" type="button" class="btn" aria-pressed="false">Eraser</button>
-</div>
+            <div class="range-wrapper brightness-wrapper">
+                <span class="icon-label">🌑</span>
+                <input type="range" id="brightness-slider" min="0" max="100" value="50" title="Adjust Lightness">
+                <span class="icon-label">☀️</span>
+            </div>
+        </div>
 
-<div class="etch-frame">
-  <div class="screen-bezel">
-    <div class="container" id="container"></div>
-  </div>
-  <div class="knob knob-left"></div>
-  <div class="knob knob-right"></div>
-</div>
+        <div class="control-group actions">
+            <button id="clearBtn" class="btn btn-destructive" type="button">Clear</button>
+        </div>
+
+    </div>
+
+    <div class="etch-frame">
+        <div class="screen-bezel">
+            <div class="container" id="container"></div>
+        </div>
+        <div class="knob knob-left"></div>
+        <div class="knob knob-right"></div>
+    </div>
+
 </body>
 </html>
