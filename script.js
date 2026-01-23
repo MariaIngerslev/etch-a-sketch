@@ -9,6 +9,7 @@ const gridSizeSlider = document.querySelector('#grid-size-slider');
 const gridSizeDisplay = document.querySelector('#grid-size-display');
 const colorPicker = document.querySelector('#colorPicker');
 const brightnessSlider = document.querySelector('#brightness-slider');
+const downloadBtn = document.querySelector('#downloadBtn');
 
 /* Mode Buttons */
 const modeRainbowBtn = document.querySelector('#modeRainbow');
@@ -150,6 +151,60 @@ colorPicker.addEventListener('click', () => setDrawMode('color'));
 brightnessSlider.addEventListener('input', (e) => {
   brightnessValue = Number(e.target.value);
 });
+
+/**
+ * Capture the current grid as a PNG image using an off-screen canvas.
+ * This avoids any external libraries (like html2canvas) while still
+ * producing a clean, pixel-aligned export of the drawing.
+ */
+function downloadCurrentGridImage() {
+  const gridSize = Number(gridSizeSlider.value) || DEFAULT_GRID_SIZE;
+  const canvasSize = 640; // Matches the visual container size in CSS
+
+  const canvas = document.createElement('canvas');
+  canvas.width = canvasSize;
+  canvas.height = canvasSize;
+
+  const ctx = canvas.getContext('2d');
+  const squareSize = canvasSize / gridSize;
+
+  const squares = container.querySelectorAll('.square');
+
+  for (let row = 0; row < gridSize; row++) {
+    for (let col = 0; col < gridSize; col++) {
+      const index = row * gridSize + col;
+      const square = squares[index];
+
+      if (!square) continue;
+
+      // Read the computed background color of each square.
+      let color = window.getComputedStyle(square).backgroundColor;
+
+      // Fallback to white if for some reason the color is transparent/undefined.
+      if (!color || color === 'rgba(0, 0, 0, 0)') {
+        color = 'rgb(255, 255, 255)';
+      }
+
+      ctx.fillStyle = color;
+      ctx.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
+    }
+  }
+
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `etch-a-sketch-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  });
+}
+
+downloadBtn.addEventListener('click', downloadCurrentGridImage);
 
 /* --- INIT --- */
 createGrid(DEFAULT_GRID_SIZE);
