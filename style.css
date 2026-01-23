@@ -179,6 +179,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 
 input[type="color"] {
     -webkit-appearance: none;
+    appearance: none;
     border: none;
     width: 150%;
     height: 150%;
